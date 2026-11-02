@@ -1,0 +1,104 @@
+﻿@page
+@model IndividualWebApp.Pages.MakeTabModel
+@{
+	ViewData["Title"] = "Make page";
+	Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/Make.css">
+    <title>Create</title>
+</head>
+<body>
+    <div class="angry-grid">
+        <div id="item-0">
+            <h2 class="Header" style="padding-left : -10px;">
+                Tabber™
+                <a href="Login">
+                    <img src="images/login.png" height="100px" width="110px" id="loginImage" style="padding-left: 1308px;">
+                </a>
+            </h2>
+        </div>
+
+        <div id="item-1">
+            <div id="footer">© 2025 Tabber™ - All rights reserved.</div>
+        </div>
+        <div id="item-2">
+            <a href="index" id="hrefs" style="align-items : end">
+                <div class="buttons">
+                    <img src="~/images/HomeButton.png"  width="180px" height="170px"/>
+                </div>
+            </a>
+        </div>
+  
+        <div id="item-3" style="background-color: #1F1D35">
+            <div class="search-container">
+                <input type="text" placeholder="Browse your own tabs..." class="search-input">
+                <button class="search-button">
+                    <img src="images/searchicon.png" alt="searchicon" height="50px">
+                </button>
+            </div>
+        </div>
+        <div id="item-4">
+            <div class="scrollbaar-vak" style="border-radius: 10px;">
+                @if (Model.userTabs != null && Model.userTabs.Count > 0)
+                {
+                    @foreach (var tab in Model.userTabs)
+                    {
+                        <div style="        text-align: start;
+                                        padding: 30px;
+                                        border-radius: 10px;
+                                        width: 900px;
+                                        height: 50px;
+                                        color : white;
+                                        background-color: #413253;
+                                        border-color: 0;
+                                        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+                                        margin-bottom : 15px;
+                                        font-family: 'Franklin Gothic Medium' , 'Arial Narrow' , Arial, sans-serif;
+                                        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+                                        font-size:40px;
+                                        border: 5px solid #1F1D35;
+                                                ">
+                            @tab.TabName
+                        </div>
+                    }
+                }
+                else
+                {
+                    <div style="        text-align: center;
+                                        padding: 30px;
+                                        border-radius: 10px;
+                                        width: 900px;
+                                        height: 50px;
+                                        color : #ea8183;
+                                        background-color: #413253;
+                                        border-color: 0;
+                                        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+                                        margin-bottom : 15px;
+                                        font-family: 'Franklin Gothic Medium' , 'Arial Narrow' , Arial, sans-serif;
+                                        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+                                        font-size:40px;
+                                        border: 5px solid #1F1D35;
+                                                            ">
+                        You don't have any tabs yet
+                    </div>
+                }
+            </div>
+
+        </div>
+        <div id="item-5">
+            <a href="" id="hrefs">
+                <div id="newbutton" style="margin-left : 40px;margin-top : 10px; background-color : transparent;">
+                    <img src="~/images/plus.png" width="150px" height="140px"/>
+                </div>
+            </a>
+        </div>
+    </div>
+
+</body>
+</html>

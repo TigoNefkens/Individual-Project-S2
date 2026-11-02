@@ -1,0 +1,130 @@
+﻿@page
+@model IndividualWebApp.Pages.SearchTabModel
+@{
+    ViewData["Title"] = "Search page";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/Search.css">
+    <title>Search</title>
+</head>
+<body>
+    <div class="angry-grid">
+        <div id="item-0">
+            <h2 class="Header" style="padding-left : -10px;">
+                Tabber™
+                <a href="Login">
+                    <img src="images/login.png" height="100px" width="110px" id="loginImage" style="padding-left: 1308px;">
+                </a>
+            </h2>
+        </div>
+
+        <div id="item-1">
+            <div id="footer">© 2025 Tabber™ - All rights reserved.</div>
+        </div>
+        <div id="item-2">
+            <a href="index" id="hrefs" style="align-items : end">
+                <div class="buttons">
+                    <img src="~/images/HomeButton.png" width="165px" height="155px" style="margin-left : 7px" />
+                </div>
+            </a>
+        </div>
+
+        <div id="item-3" style="background-color: #1F1D35">
+            <div class="search-container">
+                <form method="post" asp-page-handler="Search" style="display:flex; flex-direction : row;">
+                    <input type="text" placeholder="@(TempData["SearchError"] ?? "Browse public tabs...")" class="search-input" name="searchTerms">
+                    <button class="search-button" type="submit">
+                        <img src="images/searchicon.png" alt="searchicon" height="50">
+                    </button>
+                </form>
+            </div>
+        </div>
+        <div id="item-4">
+            <div class="scrollbaar-vak" style="border-radius: 10px;">
+                @if (Model.userTabs != null && Model.userTabs.Count > 0)
+                {
+                    @foreach (var tab in Model.userTabs)
+                    {
+                        <div style="        text-align: start;
+                                        padding: 30px;
+                                        display : flex;
+                                        flex-direction : row;
+                                        justify-content : center;
+                                        align-items : center;
+                                        border-radius: 10px;
+                                        width: 900px;
+                                        height: 50px;
+                                        color : white;
+                                        background-color: #413253;
+                                        border-color: 0;
+                                        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+                                        margin-bottom : 15px;
+                                        font-family: 'Franklin Gothic Medium' , 'Arial Narrow' , Arial, sans-serif;
+                                        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+                                        font-size:40px;
+                                        border: 5px solid #1F1D35;
+                                                        ">
+                            @tab.TabName
+                            <form method="post" asp-page-handler="View" style="margin-left : auto; margin-top : 10px">
+                                <button type="submit" name="tabId" value="@tab.TabID" style="background-color : transparent; border: none; padding: 0; cursor: pointer;">
+                                    <img src="~/images/eye.png" width="110px" height="100px" />
+                                </button>
+                            </form>
+
+                        </div>
+                    }
+                }
+                else
+                {
+                    <div style="        text-align: center;
+                                        padding: 30px;
+                                        border-radius: 10px;
+                                        width: 900px;
+                                        height: 50px;
+                                        color : #ea8183;
+                                        background-color: #413253;
+                                        border-color: 0;
+                                        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+                                        margin-bottom : 15px;
+                                        font-family: 'Franklin Gothic Medium' , 'Arial Narrow' , Arial, sans-serif;
+                                        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+                                        font-size:40px;
+                                        border: 5px solid #1F1D35;
+                                                        ">
+                        No tabs found
+                    </div>
+                }
+            </div>
+        </div>
+        <div id="container" style="display : flex; flex-direction : column; margin-left : 49px; margin-top : -40px;">
+
+            <form method="post" asp-page-handler="Preferences">
+                <button type="submit" style="background-color : transparent; border: none; padding: 0; cursor: pointer;">
+                    <img src="~/images/Heart.png" width="130px" height="120px" />
+                </button>
+            </form>
+
+            <form method="post" asp-page-handler="MostClicked" style="margin-top : -10px; margin-left : 5px">
+                <button type="submit" style="background-color : transparent; border: none; padding: 0; cursor: pointer;">
+                    <img src="~/images/Star.png" width="120px" height="120px" />
+                </button>
+            </form>
+
+            <form method="post" asp-page-handler="All" style="margin-top : -5px; margin-left : 5px">
+                <button type="submit" style="background-color : transparent; border: none; padding: 0; cursor: pointer;">
+                    <img src="~/images/All.png" width="120px" height="120px" />
+                </button>
+            </form>
+        </div>
+        <div id="item-5">
+        </div>
+    </div>
+
+</body>
+</html>

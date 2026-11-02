@@ -1,0 +1,156 @@
+﻿@page
+@model IndividualWebApp.Pages.LoginModel
+@{
+	ViewData["Title"] = "Login page";
+	Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/login.css">
+    <title>login</title>
+</head>
+<body>
+    <div class="angry-grid">
+        <div id="item-0">
+            <h2 class="Header">Tabber™</h2>
+        </div>
+        <div class="scroll-container">
+            <img src="~/images/tabbackground.png" alt="TabImage1">
+            <img src="~/images/tabbackground.png" alt="TabImage2">
+            <img src="~/images/tabbackground.png" alt="TabImage3">
+            <img src="~/images/tabbackground.png" alt="TabImage4">
+            <img src="~/images/tabbackground.png" alt="TabImage5">
+            <img src="~/images/tabbackground.png" alt="TabImage6">
+            <img src="~/images/tabbackground.png" alt="TabImage7">
+            <img src="~/images/tabbackground.png" alt="TabImage8">
+            <img src="~/images/tabbackground.png" alt="TabImage9">
+            <img src="~/images/tabbackground.png" alt="TabImage10">
+            <img src="~/images/tabbackground.png" alt="TabImage11">
+            <img src="~/images/tabbackground.png" alt="TabImage12">
+            <img src="~/images/tabbackground.png" alt="TabImage13">
+            <img src="~/images/tabbackground.png" alt="TabImage14">
+            <img src="~/images/tabbackground.png" alt="TabImage15">
+            <img src="~/images/tabbackground.png" alt="TabImage16">
+        </div>
+        <div id="item-1" style="width : 900px; margin-left : 250px;">
+            <a href="/index" id="hrefs">
+                <div id="backbutton">
+                    <img src="images/arrow.png" height="100px" width="110px" />
+                </div>
+            </a>
+            <div>
+                <div id="header-text" style="padding-left: 165px;">Login or register</div>
+            </div>
+        </div>
+
+
+        <div id="item-2" style="width : 1400px;">
+
+
+            <form method="post" asp-page-handler="Login" style="margin-left : 75px">
+                <div id="formcontainer">
+                    <label for="Username" id="usernameloginlabel">Log in with existing account :</label>
+
+                    <input asp-for="LoginUsername" type="text" id="usernameloginfield" placeholder="Type in your email-address..." style="padding-left: 5px;height:45px">
+
+                    <input asp-for="LoginPassword" type="password" id="passwordloginfield" placeholder="Type in your password..." style="padding-left: 5px;height:45px;    padding: 10px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 10px;">
+
+                    <button type="submit" class="buttons">
+                        <div class="button-text">Confirm</div>
+                    </button>
+
+                </div>
+
+            </form>
+
+            <div id="validation-messages"
+                 data-errors="@TempData["ValidationErrors"]"
+                 style="color:#EC2A5F;
+                width:400px;
+                justify-content:center;
+                align-content:center;
+                display:flex;
+                flex-direction: column;
+                align-items: center;
+                height:250px;
+                margin-top:50px;
+                text-align:center;
+                font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+                font-size: 18px;
+                background-color:#333347;
+                margin-left:100px;
+                border-radius:10px;
+                border: 5px solid #1F1D35;
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.1);
+                margin-right : 0px">
+
+                @if (string.IsNullOrEmpty(TempData["ValidationErrors"] as string))
+                {
+                    <img src="~/images/GOEIETAB.png" alt="Info" style="width:250px;height:250px;" />
+                }
+                else
+                {
+                    @Html.Raw(TempData["ValidationErrors"].ToString().Replace("\n", "<br><br>"))
+                }
+            </div>
+
+            <form method="post" asp-page-handler="Register">
+                <div id="formcontainer">
+
+                    <label for="Username" id="usernamecreatelabel" style="margin-left : 10px">Create an account:</label>
+
+                    <input asp-for="RegisterUsername" type="text" id="usernamecreatefield" placeholder="Type in an email-addres..." style="padding-left: 5px;height:45px;">
+
+                    <input asp-for="RegisterPassword" type="password" id="passwordcreatefield" placeholder="Type in a password..." style="padding-left: 5px;height:45px;    padding: 10px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 10px;">
+
+                    <button type="submit" class="buttons">
+                        <div class="button-text">Confirm</div>
+                    </button>
+
+                </div>
+                <div id="dropdown" style=" width: 125px ;
+    height: 234px;
+    background-color: #513e66;
+    margin-left: 340px;
+    color : white;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    margin-top: -243px;
+    overflow-y: auto;  border: 5px solid #1F1D35;border-radius:10px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.1);font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">
+                    @if (Model.categoryList != null && Model.categoryList.Count > 0){
+                        @foreach(var c in Model.categoryList){
+                            <div style="display: flex; align-items: center; margin-bottom : 2px;color : white;">
+                                <input type="checkbox" name="SelectedCategories" value=@c.ID>
+                                <label for=@c.Name style="margin-left: 8px;">@c.Name</label>
+                            </div>
+                        }
+                    }
+                </div>
+            </form>
+           
+        </div>
+
+        <div id="item-3">&nbsp;</div>
+       
+        <div id="item-4">
+            <div id="footer">© 2025 Tabber™ - All rights reserved.</div>
+        </div>
+    </div>
+    <script src="~/js/scrollingTab.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
